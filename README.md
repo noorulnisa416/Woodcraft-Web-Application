@@ -28,6 +28,24 @@ Orders, workshop tasks, inventory, worklogs, billing and reports, all in one rol
 
 ---
 
+## 📌 Table of Contents
+
+- [Overview](#-overview)
+- [Why Woodcraft?](#-why-woodcraft)
+- [Features](#-features)
+- [User Roles](#-user-roles)
+- [Screenshots](#-screenshots)
+- [Technology Stack](#-technology-stack)
+- [Application Architecture](#-application-architecture)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Application Routes](#-application-routes)
+- [Security Notes](#-security-notes)
+- [Academic Achievement](#-academic-achievement)
+- [Future Improvements](#-future-improvements)
+
+---
+
 ## 🌿 Overview
 
 **Woodcraft** brings every step of a woodworking workshop into one place: from a customer's order to artisan work, material usage, invoicing and delivery. It offers separate experiences for **administrators**, **customers** and **employees**.
@@ -36,39 +54,76 @@ The frontend runs on its own in development mode using mock data and `localStora
 
 ---
 
+
+## 🎯 Why Woodcraft?
+
+Woodcraft demonstrates how web technologies can help digitize everyday business workflows.
+
+- 🧩 **Centralized workflows** — bring orders, inventory, worklogs, billing, and reports into one application.
+- 👥 **Role-aware experience** — show relevant pages and actions for each user role.
+- 📦 **Resource visibility** — organize material stock and highlight low-stock levels.
+- ⏱️ **Work tracking** — record assigned tasks and employee work hours.
+- 🧾 **Financial organization** — connect invoices and payment records with customer orders.
+- 📊 **Business insights** — present workshop and financial information through reports.
+
 ## ✨ Features
 
-<table>
-  <tr>
-    <td width="33%" valign="top">
-      <h3>🔐 Access Control</h3>
-      Role-based dashboards and an approval workflow for new customer and employee accounts.
-    </td>
-    <td width="33%" valign="top">
-      <h3>📋 Orders</h3>
-      Custom design, furniture and repair orders tracked from Pending to Delivered.
-    </td>
-    <td width="33%" valign="top">
-      <h3>🪵 Inventory</h3>
-      Material stock, unit costs and low-stock alerts, with stock reduced as orders are assigned.
-    </td>
-  </tr>
-  <tr>
-    <td valign="top">
-      <h3>👷 Employees & Wages</h3>
-      Task assignment, logged work hours and automatic wage summaries.
-    </td>
-    <td valign="top">
-      <h3>💳 Billing</h3>
-      Invoices linked to orders, full or partial payments, balances and receipts.
-    </td>
-    <td valign="top">
-      <h3>📊 Reports</h3>
-      Revenue trends, order status, material usage and productivity charts.
-    </td>
-  </tr>
-</table>
+<details open>
+<summary><strong>🔐 Authentication & Access Control</strong></summary>
 
+- Login and registration interfaces.
+- Role-based navigation for `admin`, `customer`, and `employee`.
+- Registration approval workflow for customer and employee accounts.
+- Backend reference implementation includes JWT authentication and password hashing.
+
+</details>
+
+<details open>
+<summary><strong>📋 Customer & Order Management</strong></summary>
+
+- Organize custom design, furniture creation, and repair/restoration orders.
+- Track order progress through stages such as Pending, In Progress, Completed, and Delivered.
+- Associate materials and employee tasks with orders.
+
+</details>
+
+<details>
+<summary><strong>🪵 Inventory & Materials</strong></summary>
+
+- Maintain records for lumber, finishes, hardware, and other workshop materials.
+- Track stock levels, unit costs, and replenishment.
+- Support low-stock awareness and material utilization reporting.
+
+</details>
+
+<details>
+<summary><strong>👷 Employee, Worklog & Wage Tracking</strong></summary>
+
+- Maintain employee profiles and skill information.
+- Assign workshop tasks.
+- Record hours worked and task notes.
+- Summarize work hours and wage calculations.
+
+</details>
+
+<details>
+<summary><strong>💳 Billing, Invoices & Payments</strong></summary>
+
+- Link invoices with customer orders.
+- Track invoice states such as Unpaid, Partial, and Paid.
+- Record payments, calculate balances, and provide printable receipt actions.
+
+</details>
+
+<details>
+<summary><strong>📊 Reports & Administration</strong></summary>
+
+- Display workshop and financial analytics.
+- Review revenue trends, material usage, and productivity information.
+- Review registration requests and manage account status.
+- Provide an administrative audit-log view.
+
+</details>
 ---
 
 ## 👥 User Roles
@@ -141,37 +196,63 @@ flowchart TD
     G --> H[MySQL Database]
 ```
 
-**Development mode:** mock data and `localStorage`, no database needed.
-**API mode:** requests go to the Express API, which connects to MySQL.
+**Development mode:** the frontend can use mock data and `localStorage` for interactive evaluation without a live database connection.
 
----
+**API mode:** the frontend can send requests to the Express API, which connects to MySQL. Configure the backend environment variables before using this mode.
 
 ## 📁 Project Structure
 
 ```text
 Woodcraft/
-├── backend/            # Express API (middleware, routes, db.js, server.js)
-├── database/           # woodcraft.sql, woodcraft_full_schema.sql
-├── docs/screenshots/   # README images
-├── dist/               # Production build output
-├── public/             # Static assets
-├── reference/          # Backend implementation guide
+├── backend/                      # Node.js + Express API
+│   ├── middleware/               # Authentication and authorization
+│   ├── routes/                   # Auth, orders, inventory, billing, etc.
+│   ├── .env                      # Local environment variables (never commit)
+│   ├── db.js                     # Database connection
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js                 # API entry point
+├── database/
+│   ├── woodcraft.sql
+│   └── woodcraft_full_schema.sql
+├── docs/                         # README media
+│   ├── screenshots/              # Application screenshots
+│   └── diagrams/                 # Architecture and class diagrams
+├── dist/                         # Production build output (generated)
+├── public/                       # Static assets
+├── reference/
+│   └── README.md                 # Backend implementation guide
 ├── src/
-│   ├── assets/
-│   ├── components/     # Layout and UI components
-│   ├── hooks/
-│   ├── lib/            # API, auth, calculations, mock data
-│   ├── pages/          # Dashboards and application pages
-│   ├── services/
-│   ├── test/
-│   ├── App.tsx
-│   └── main.tsx
+│   ├── assets/                   # Images and brand assets
+│   ├── components/               # Shared layout and UI components
+│   ├── hooks/                    # Custom React hooks
+│   ├── lib/                      # API, auth, calculations, mock data
+│   ├── pages/                    # Dashboards and application pages
+│   ├── services/                 # API integration services
+│   ├── test/                     # Vitest tests and setup
+│   ├── App.css
+│   ├── App.tsx                   # Routes and providers
+│   ├── index.css                 # Global styles
+│   ├── main.tsx                  # Entry point
+│   └── vite-env.d.ts
+├── .gitignore
+├── bun.lockb
+├── components.json               # shadcn/ui configuration
+├── eslint.config.js
+├── index.html
 ├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── README.md
 ├── tailwind.config.ts
 ├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
 ├── vite.config.ts
 └── vitest.config.ts
 ```
+
+*This is a high-level guide; exact files may differ as the project evolves.*
 
 ---
 
@@ -256,7 +337,26 @@ mysql -u your_local_mysql_user -p < database/woodcraft.sql
 
 ## 🎓 Academic Achievement
 
-**Final Year Project: Woodcraft Web Application** · Grade **A+** · GPA **4.00 / 4.00**
+**Final Year Project — Woodcraft Web Application**
+
+- **Grade:** A+
+- **GPA:** 4.00 / 4.00
+
+This project provided practical experience in web application development, component-based UI design, role-aware navigation, database concepts, API integration, and organizing real-world business workflows.
+
+## 🌱 Future Improvements
+
+Potential directions for further development include:
+
+- Add automated tests for key workflows and access-control rules.
+- Improve accessibility and responsive behavior across devices.
+- Add deployment documentation and a safe demo environment.
+- Expand audit logging and validation around important business actions.
+- Add sanitized screenshots and a short project walkthrough video.
+
+## 🤝 Feedback
+
+Suggestions and constructive feedback are welcome. If you explore the project, feel free to share ideas for improving its usability, code quality, or security.
 
 ---
 
@@ -266,6 +366,6 @@ mysql -u your_local_mysql_user -p < database/woodcraft.sql
 
 *Designed to bring workshop workflows into one organized digital experience.*
 
-⭐ If you find this project useful, consider starring the repository.
+⭐ If you find this project useful or interesting, consider starring the repository.
 
 </div>
