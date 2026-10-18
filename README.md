@@ -345,13 +345,13 @@ mysql -u your_local_mysql_user -p < database/woodcraft.sql
 <table>
   <tr>
     <td align="center">
-      <img src="docs/Screenshots/academic-result.png" alt="Final Project CS619 result: 4.00, grade A" width="100%"><br>
+      <img src="docs/screenshots/academic-result.png" alt="Final Project CS619 result: 4.00, grade A" width="100%"><br>
       <sub><b>Final result</b>: Fall 2025, CS619, 4.00 (A)</sub>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="docs/Screenshots/academic-projects.png" alt="Project deliverables marked as complete: SRS, Design Document, Prototype Phase, Final Deliverable" width="100%"><br>
+      <img src="docs/screenshots/academic-projects.png" alt="Project deliverables marked as complete: SRS, Design Document, Prototype Phase, Final Deliverable" width="100%"><br>
       <sub><b>Project milestones</b>: SRS, Design Document, Prototype Phase and Final Deliverable, all marked complete</sub>
     </td>
   </tr>
